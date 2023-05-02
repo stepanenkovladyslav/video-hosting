@@ -22,11 +22,36 @@ class UserController {
 		res.json(token);
 	}
 
-	static login(req, res) {}
+	static async login(req, res) {
+		const { email, password } = req.body;
+		const user = await User.findOne({ where: { email } });
+		if (user) {
+			const comparePassword = await bcrypt.compare(
+				password,
+				user.password
+			);
+			if (comparePassword) {
+				const token = generateJwt(user.id, user.email);
+				res.json(token);
+			} else {
+				res.status(404).json({ message: "Wrong password" });
+			}
+		} else {
+			res.status(404).json({ message: "Wrong email or password" });
+		}
+	}
 
-	static update(req, res) {}
-
-	static logout(req, res) {}
+	static async updateToken(req, res) {
+		try {
+			const oldToken = req.headers.authorization.split(" ")[1];
+			const verifier = jwt.verify(oldToken, process.env.SECRET_KEY);
+			const user = verifier;
+			const newToken = generateJwt(user.id, user.email);
+			res.json(newToken);
+		} catch (e) {
+			res.json({ error: "Wrong token" });
+		}
+	}
 }
 
 module.exports = UserController;
