@@ -29,7 +29,7 @@ const Comment = sequelize.define("Comment", {
 	text: { type: DataTypes.STRING, allowNull: false },
 });
 
-const Video = sequelize.define("Video", {
+const Video = sequelize.define("video", {
 	id: {
 		type: DataTypes.INTEGER,
 		allowNull: false,
