@@ -29,14 +29,15 @@ const Comment = sequelize.define("Comment", {
 	text: { type: DataTypes.STRING, allowNull: false },
 });
 
-const Video = sequelize.define("video", {
+const Video = sequelize.define("Video", {
 	id: {
 		type: DataTypes.INTEGER,
 		allowNull: false,
 		primaryKey: true,
 		autoIncrement: true,
 	},
-	vid: { type: DataTypes.STRING, allowNull: false },
+	name: { type: DataTypes.STRING, allowNull: false },
+	fileName: { type: DataTypes.STRING, allowNull: false },
 });
 
 User.hasMany(Video);

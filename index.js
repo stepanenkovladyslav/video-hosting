@@ -4,11 +4,12 @@ const sequelize = require("./db");
 const router = require("./routes/router");
 const { Sequelize } = require("sequelize");
 const models = require("./model/models");
+const hbs = require("hbs");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 app.get("/dbname", (req, res) => res.send(process.env.DB_NAME));
-
+app.set("view engine", "hbs");
 app.use("/", router);
 
 const connect = async () => {

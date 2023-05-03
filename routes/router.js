@@ -6,6 +6,6 @@ const commentRouter = require("./commentRoutes");
 const router = new Router();
 
 router.use("/users", userRouter);
-router.use("/videos", videoRouter);
+router.use("/", videoRouter);
 router.use("/comments", commentRouter);
 module.exports = router;

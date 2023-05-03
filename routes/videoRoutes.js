@@ -1,8 +1,9 @@
 const Router = require("express");
-const Video = require("../controllers/videoController");
+const VideoController = require("../controllers/videoController");
 
 const videoRouter = new Router();
 
-videoRouter.use("/", Video);
+videoRouter.get("/", VideoController.getAll);
+videoRouter.get("/video/:id", VideoController.getOne);
 
 module.exports = videoRouter;
