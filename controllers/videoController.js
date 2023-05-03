@@ -2,13 +2,18 @@ const fs = require("fs");
 const { Video } = require("../model/models");
 const { log } = require("console");
 const path = require("path");
+const express = require("express");
+
+const pathStyles = function () {
+	return path.join(__dirname, "..", "views", "css", "home.css");
+};
 
 class VideoController {
 	static async getAll(req, res) {
-		const videos = await Video.findAll();
-		console.log(videos);
+		const videos = await Video.findAll({ raw: true });
 		res.render("home.hbs", {
 			videos: videos,
+			path: pathStyles(),
 		});
 	}
 
