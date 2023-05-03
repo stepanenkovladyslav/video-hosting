@@ -1,10 +1,11 @@
-    <div class="video-grid">
-        {{#each videos}}
-        <div class="video-container">
-            <h3>{{this.name}}</h3>
-            <video width="650" height="300" class="video" muted="muted" controls >
-                <source src="/video/{{this.id}}" type="video/mp4"/>
-            </video>
-        </div>
-        {{/each}}
+<div class="video-grid">
+    {{#each videos}}
+    <div class="video-container">
+        <h3>{{this.name}}</h3>
+        <video width="650" height="300" class="video" muted="muted" controls >
+            <source src="/api/video/{{this.id}}" type="video/mp4"/>
+        </video>
     </div>
+    {{/each}}
+</div>
+

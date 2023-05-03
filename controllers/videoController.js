@@ -11,9 +11,10 @@ const pathStyles = function () {
 class VideoController {
 	static async getAll(req, res) {
 		const videos = await Video.findAll({ raw: true });
+		const users = req.users;
 		res.render("home.hbs", {
 			videos: videos,
-			path: pathStyles(),
+			styles: '<link href="../css/home.css" rel="stylesheet"></link>',
 		});
 	}
 
@@ -45,6 +46,15 @@ class VideoController {
 
 		const videoStream = fs.createReadStream(videoPath, { start, end });
 		videoStream.pipe(res);
+	}
+
+	static async vidPage(req, res) {
+		const id = +req.params.id;
+		const video = await Video.findOne({ raw: true }, { where: { id } });
+		res.render("video.hbs", {
+			video: video,
+			styles: '<link href="../css/vidPage.css" rel="stylesheet"></link>',
+		});
 	}
 }
 
