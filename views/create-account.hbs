@@ -1,12 +1,12 @@
 <div class="form-container">
     <h3>Create Account</h3>
-    <form method="post" action="/register" class="register-form">
+    <form method="POST" action="/users/register" class="register-form">
         <label>Username</label>
-        <input type="text"><br>
+        <input type="text" name="username" ><br>
         <label>Email</label>
-        <input type="email"><br>
+        <input type="email" name="email" ><br>
         <label>Password</label>
-        <input type="password"><br>
+        <input type="password" name="password" ><br>
         <input type="submit" value="Submit" class="btn">
     </form>
 </div>

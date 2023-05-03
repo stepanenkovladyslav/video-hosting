@@ -50,7 +50,8 @@ class VideoController {
 
 	static async vidPage(req, res) {
 		const id = +req.params.id;
-		const video = await Video.findOne({ raw: true }, { where: { id } });
+		const video = await Video.findOne({ where: { id }, raw: true });
+		console.log(video);
 		res.render("video.hbs", {
 			video: video,
 			styles: '<link href="../css/vidPage.css" rel="stylesheet"></link>',

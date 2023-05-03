@@ -10,15 +10,16 @@ const generateJwt = (id, email) => {
 
 class UserController {
 	static async register(req, res) {
-		const { email, password } = req.body;
+		const { username, email, password } = req.body;
 		const hashPassword = await bcrypt
 			.hash(password, 10)
 			.catch((err) => console.log(err));
 		const user = await User.create({
+			username: username,
 			email: email,
 			password: hashPassword,
 		});
-		const token = generateJwt(user.id, user.email);
+		const token = generateJwt(user.id, user.email, user.username);
 		res.json(token);
 	}
 
