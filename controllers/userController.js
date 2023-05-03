@@ -22,6 +22,11 @@ class UserController {
 		res.json(token);
 	}
 
+	static registerPage(req, res) {
+		res.render("create-account.hbs", {
+			styles: '<link href="../css/createAcc.css" rel="stylesheet"></link>',
+		});
+	}
 	static async login(req, res) {
 		const { email, password } = req.body;
 		const user = await User.findOne({ where: { email } });
