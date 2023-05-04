@@ -30,6 +30,7 @@ class UserController {
 	}
 	static async login(req, res) {
 		const { email, password } = req.body;
+		console.log(password);
 		const user = await User.findOne({ where: { email } });
 		if (user) {
 			const comparePassword = await bcrypt.compare(
@@ -57,6 +58,12 @@ class UserController {
 		} catch (e) {
 			res.json({ error: "Wrong token" });
 		}
+	}
+
+	static async loginPage(req, res) {
+		res.render("login.hbs", {
+			styles: '<link href="../css/login.css" rel="stylesheet"></link>',
+		});
 	}
 }
 

@@ -12,8 +12,19 @@ class VideoController {
 	static async getAll(req, res) {
 		const videos = await Video.findAll({ raw: true });
 		const users = req.users;
+		const usersObj = users.reduce(
+			(acc, user) => {
+				acc[user.id] = user.username;
+				return acc;
+			},
+
+			{}
+		);
+		const videosWithUserNames = videos.map((video) => {
+			return { ...video, userName: usersObj[video.UserId] };
+		});
 		res.render("home.hbs", {
-			videos: videos,
+			videos: videosWithUserNames,
 			styles: '<link href="../css/home.css" rel="stylesheet"></link>',
 		});
 	}
