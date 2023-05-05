@@ -67,15 +67,24 @@ class VideoController {
 			acc[user.id] = user.username;
 			return acc;
 		}, {});
-		const commentsWithNames = comments.map((comment) => {
-			return { ...comment, userName: allUsers[comment.UserId] };
-		});
-		res.render("video.hbs", {
-			video: video,
-			user: user,
-			comments: commentsWithNames,
-			styles: '<link href="../css/vidPage.css" rel="stylesheet"></link>',
-		});
+		if (comments.length > 0) {
+			const commentsWithNames = comments.map((comment) => {
+				return { ...comment, userName: allUsers[comment.UserId] };
+			});
+			res.render("video.hbs", {
+				video: video,
+				author: user,
+				comments: commentsWithNames,
+				styles: '<link href="../css/vidPage.css" rel="stylesheet"></link>',
+			});
+		} else {
+			res.render("video.hbs", {
+				video: video,
+				author: user,
+				comments: [{ text: "There are not comments", userName: "" }],
+				styles: '<link href="../css/vidPage.css" rel="stylesheet"></link>',
+			});
+		}
 	}
 }
 
