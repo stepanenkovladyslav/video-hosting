@@ -20,7 +20,9 @@ class UserController {
 			password: hashPassword,
 		});
 		const token = generateJwt(user.id, user.email, user.username);
-		res.json(token);
+		res.render("thank-you.hbs", {
+			styles: '<link href="/css/thank-you.css" rel="stylesheet"></link>',
+		});
 	}
 
 	static registerPage(req, res) {
@@ -39,7 +41,9 @@ class UserController {
 			);
 			if (comparePassword) {
 				const token = generateJwt(user.id, user.email);
-				res.json(token);
+				res.render("thank-you.hbs", {
+					styles: '<link href="/css/thank-you.css" rel="stylesheet"></link>',
+				});
 			} else {
 				res.status(404).json({ message: "Wrong password" });
 			}

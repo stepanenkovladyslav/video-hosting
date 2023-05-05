@@ -9,6 +9,9 @@ const multer = require("multer");
 
 const videoRouter = new Router();
 
+const formParser = express.urlencoded({ extended: true });
+
+//Multer for uploads
 const storageConfig = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, "./videos");
@@ -17,19 +20,33 @@ const storageConfig = multer.diskStorage({
 		cb(null, file.originalname);
 	},
 });
-const multerMiddleware = multer({ storage: storageConfig });
 
-const formParser = express.urlencoded({ extended: true });
+const fileFilter = (req, file, cb) => {
+	if (file.mimetype === "video/mp4" || file.mimetype === "video/quicktime") {
+		cb(null, true);
+	} else {
+		cb(null, false);
+	}
+};
+const multerMiddleware = multer({
+	storage: storageConfig,
+	fileFilter: fileFilter,
+});
+//
 
 videoRouter.get("/", findUsersMiddleware, VideoController.getAll);
+
 videoRouter.get(
 	"/video/:id",
 	findUsersMiddleware,
 	findCommentsMiddleware,
 	VideoController.vidPage
 );
+
 videoRouter.get("/api/video/:id", VideoController.getOne);
+
 videoRouter.get("/upload", VideoController.uploadPage);
+
 videoRouter.post(
 	"/api/upload",
 	formParser,

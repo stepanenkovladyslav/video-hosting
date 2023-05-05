@@ -4,10 +4,6 @@ const { log } = require("console");
 const path = require("path");
 const express = require("express");
 
-const pathStyles = function () {
-	return path.join(__dirname, "..", "views", "css", "home.css");
-};
-
 class VideoController {
 	static async getAll(req, res) {
 		const videos = await Video.findAll({ raw: true });
@@ -96,12 +92,14 @@ class VideoController {
 	static async uploadVideo(req, res) {
 		const upload = req.file;
 		const name = req.body.name;
-		const video = Video.create({
+		const video = await Video.create({
 			name: name,
 			fileName: upload.originalname,
 			UserId: 1,
 		});
-		res.json(video);
+		res.render("thank-you.hbs", {
+			styles: '<link href="../css/thank-you.css" rel="stylesheet"></link>',
+		});
 	}
 }
 
