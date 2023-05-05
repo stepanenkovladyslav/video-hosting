@@ -93,7 +93,16 @@ class VideoController {
 		});
 	}
 
-	static async uploadVideo(req, res) {}
+	static async uploadVideo(req, res) {
+		const upload = req.file;
+		const name = req.body.name;
+		const video = Video.create({
+			name: name,
+			fileName: upload.originalname,
+			UserId: 1,
+		});
+		res.json(video);
+	}
 }
 
 module.exports = VideoController;

@@ -1,9 +1,9 @@
 <div class="upload-container">
     <h3 class="upload-heading">Upload your video</h3>
-    <form class="upload" method="post" enctype="multipart/form-data">
+    <form class="upload" method="post" enctype="multipart/form-data" action="/api/upload">
         <label>Name of the video</label>
-        <textarea rows="2" class="video-name"></textarea>
-        <input type="file" class="upload-input" required>
+        <textarea rows="2" class="video-name" name="name" required ></textarea>
+        <input type="file" class="upload-input" name="filedata" required>
         <button class="btn">Submit</button>
     </form>
 </div>

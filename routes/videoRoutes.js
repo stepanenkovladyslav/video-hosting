@@ -8,6 +8,19 @@ const findCommentsMiddleware = require("../middlewares/findCommentsMiddleware");
 const multer = require("multer");
 
 const videoRouter = new Router();
+
+const storageConfig = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, "./videos");
+	},
+	filename: (req, file, cb) => {
+		cb(null, file.originalname);
+	},
+});
+const multerMiddleware = multer({ storage: storageConfig });
+
+const formParser = express.urlencoded({ extended: true });
+
 videoRouter.get("/", findUsersMiddleware, VideoController.getAll);
 videoRouter.get(
 	"/video/:id",
@@ -19,7 +32,8 @@ videoRouter.get("/api/video/:id", VideoController.getOne);
 videoRouter.get("/upload", VideoController.uploadPage);
 videoRouter.post(
 	"/api/upload",
-	videoRouter.use(multer({ dest: "uploads" }).single("filedata")),
+	formParser,
+	multerMiddleware.single("filedata"),
 	VideoController.uploadVideo
 );
 
