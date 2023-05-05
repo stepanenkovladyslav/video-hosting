@@ -2,6 +2,7 @@ const Router = require("express");
 const express = require("express");
 const User = require("../controllers/userController");
 const UserController = require("../controllers/userController");
+const findVideosMiddleware = require("../middlewares/findVideosMiddleware");
 
 const jsonParser = express.json();
 const userRouter = new Router();
@@ -12,5 +13,6 @@ userRouter.get("/create-account", UserController.registerPage);
 userRouter.post("/api/login", UserController.login);
 userRouter.get("/login", UserController.loginPage);
 userRouter.get("/api/auth", UserController.updateToken);
+userRouter.get("/:id", findVideosMiddleware, UserController.userPage);
 
 module.exports = userRouter;

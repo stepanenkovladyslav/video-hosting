@@ -9,7 +9,9 @@ class Comments {
 			UserId: userId,
 			VideoId: videoId,
 		});
-		res.json(createdComment);
+		res.reder("thank-you.hbs", {
+			styles: '<link href="../css/thank-you.css" rel="stylesheet"></link>',
+		});
 	}
 }
 

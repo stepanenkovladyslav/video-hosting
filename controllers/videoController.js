@@ -95,7 +95,7 @@ class VideoController {
 		const video = await Video.create({
 			name: name,
 			fileName: upload.originalname,
-			UserId: 1,
+			UserId: 4,
 		});
 		res.render("thank-you.hbs", {
 			styles: '<link href="../css/thank-you.css" rel="stylesheet"></link>',

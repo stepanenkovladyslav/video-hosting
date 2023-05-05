@@ -1,8 +1,8 @@
 <div class="video-grid">
     {{#each videos}}
     <div class="video-container">
-        <h3><a href="/video/{{this.id}}">{{this.name}}</h3></a>
-        <p class="author"><a>{{this.userName}}</a></p>
+        <h3><a href="/video/{{this.id}}">{{this.name}}</a></h3>
+        <p class="author"><a href="/users/{{this.UserId}}">{{this.userName}}</a></p>
         <video width="650" height="300" class="video" muted="muted" controls >
             <source src="/api/video/{{this.id}}" type="video/mp4"/>
         </video>

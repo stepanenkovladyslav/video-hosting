@@ -1,0 +1,13 @@
+<div class="user-container">
+    <h3 class="user">{{user.username}}</h3>
+    <div class="video-grid">
+        {{#each videos}}
+        <div class="video-container">
+            <h4><a href="/video/{{this.id}}">{{this.name}}</a></h4>
+            <video width="650" height="300" class="video" muted="muted" controls >
+                <source src="/api/video/{{this.id}}" type="video/mp4"/>
+            </video>
+        </div>
+        {{/each}}
+    </div>
+</div>

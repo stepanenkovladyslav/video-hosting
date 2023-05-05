@@ -69,6 +69,17 @@ class UserController {
 			styles: '<link href="../css/login.css" rel="stylesheet"></link>',
 		});
 	}
+
+	static async userPage(req, res) {
+		const id = req.params.id;
+		const user = await User.findOne({ where: { id }, raw: true });
+		const videos = req.videos;
+		res.render("user.hbs", {
+			user: user,
+			videos: videos,
+			styles: '<link href="../css/user.css" rel="stylesheet"></link>',
+		});
+	}
 }
 
 module.exports = UserController;
