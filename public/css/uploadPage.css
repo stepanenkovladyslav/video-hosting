@@ -1,0 +1,37 @@
+.upload-container {
+    width: 40%;
+    margin: 0 auto;
+    border: 1px solid black;
+    height: 200px;
+}
+
+.upload-heading {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.upload {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 1rem;
+}
+
+.upload-input, .video-name {
+    margin-bottom: 1rem;
+}
+
+.video-name{
+    resize: none;
+}
+
+.video-name:focus{
+    outline: none;
+}
+
+.btn {
+    width: 20%;
+    margin: 0 auto;
+}

@@ -86,6 +86,14 @@ class VideoController {
 			});
 		}
 	}
+
+	static uploadPage(req, res) {
+		res.render("upload.hbs", {
+			styles: '<link href="../css/uploadPage.css" rel="stylesheet"></link>',
+		});
+	}
+
+	static async uploadVideo(req, res) {}
 }
 
 module.exports = VideoController;
