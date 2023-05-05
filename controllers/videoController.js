@@ -42,9 +42,6 @@ class VideoController {
 		const start = Number(range.replace(/\D/g, ""));
 		const videoSize = fs.statSync(videoPath).size;
 		const chunkSize = 10 ** 6;
-		console.log(
-			`ContentSize: ${videoSize}, Start: ${start}, ChunkSize: ${chunkSize}`
-		);
 		const end = Math.min(start + chunkSize, videoSize - 1);
 		const contentLength = end - start + 1;
 		const headers = {
@@ -62,9 +59,21 @@ class VideoController {
 	static async vidPage(req, res) {
 		const id = +req.params.id;
 		const video = await Video.findOne({ where: { id }, raw: true });
-		console.log(video);
+		const user = req.users.find((user) => user.id == video.UserId);
+		const comments = req.comments.filter(
+			(comment) => comment.VideoId == video.id
+		);
+		const allUsers = req.users.reduce((acc, user) => {
+			acc[user.id] = user.username;
+			return acc;
+		}, {});
+		const commentsWithNames = comments.map((comment) => {
+			return { ...comment, userName: allUsers[comment.UserId] };
+		});
 		res.render("video.hbs", {
 			video: video,
+			user: user,
+			comments: commentsWithNames,
 			styles: '<link href="../css/vidPage.css" rel="stylesheet"></link>',
 		});
 	}

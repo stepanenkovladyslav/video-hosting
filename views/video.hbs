@@ -1,6 +1,16 @@
 <div class="video-container">
     <h3>{{video.name}}</h3>
+    <p>{{user.username}}</p>
     <video width="650" height="300" class="video" muted="muted" controls >
         <source src="/api/video/{{video.id}}" type="video/mp4"/>
     </video>
+    <section>
+        <h3>Comments</h3>
+        {{#each comments}}
+            <div class="comment">
+                <h4>{{this.userName}}</h4>
+                <p>{{this.text}}</p>
+            </div>
+        {{/each}}
+    </section>
 </div>
