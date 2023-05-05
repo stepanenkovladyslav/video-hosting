@@ -1,9 +1,15 @@
 const { Comment } = require("../model/models");
 class Comments {
-	static async getAll(req, res) {
-		const videoId = +req.params.id;
-		const comments = await Comment.findAll({ where: { VideoId: videoId } });
-		res.json(comments);
+	static async create(req, res) {
+		const { comment } = req.body;
+		const userId = 1; //for experimenting
+		const videoId = 1;
+		const createdComment = await Comment.create({
+			text: comment,
+			UserId: userId,
+			VideoId: videoId,
+		});
+		res.json(createdComment);
 	}
 }
 
