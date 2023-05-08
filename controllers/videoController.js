@@ -1,8 +1,9 @@
 const fs = require("fs");
-const { Video } = require("../model/models");
+const { Video, User, Comment } = require("../model/models");
 const { log } = require("console");
 const path = require("path");
 const express = require("express");
+const { CLIENT_RENEG_WINDOW } = require("tls");
 
 class VideoController {
 	static async getAll(req, res) {
@@ -57,19 +58,26 @@ class VideoController {
 		const video = await Video.findOne({ where: { id }, raw: true });
 
 		//!!! Получать через бд |
-		const user = req.users.find((user) => user.id == video.UserId);
+		// const user = req.users.find((user) => user.id == video.UserId);
+		const user = await User.findOne({
+			where: { id: video.UserId },
+			raw: true,
+		});
 
-		// Получать через бд коммент и его юзера / {{where:, include:{}}}
-		const comments = req.comments;
-		//!!!
-		const allUsers = req.users.reduce((acc, user) => {
-			acc[user.id] = user.username;
-			return acc;
-		}, {});
-		if (comments.length > 0) {
-			const commentsWithNames = comments.map((comment) => {
-				return { ...comment, userName: allUsers[comment.UserId] };
-			});
+		const commentsIncludeNames = await Comment.findAll({
+			where: { VideoId: video.id },
+			include: [
+				{
+					model: User,
+					attributes: ["username"],
+				},
+			],
+		});
+		if (commentsIncludeNames.length > 0) {
+			//We get username as a key string, instead of object. Down here we get it as object.
+			const commentsWithNames = commentsIncludeNames.map((x) =>
+				x.get({ plain: true })
+			);
 			res.render("video.hbs", {
 				video: video,
 				author: user,

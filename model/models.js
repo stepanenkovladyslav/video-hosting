@@ -48,6 +48,7 @@ const Video = sequelize.define("Video", {
 User.hasMany(Video);
 Video.hasMany(Comment);
 User.hasMany(Comment);
+Comment.belongsTo(User);
 
 module.exports = {
 	User,
