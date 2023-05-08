@@ -55,10 +55,13 @@ class VideoController {
 	static async vidPage(req, res) {
 		const id = +req.params.id;
 		const video = await Video.findOne({ where: { id }, raw: true });
+
+		//!!! Получать через бд |
 		const user = req.users.find((user) => user.id == video.UserId);
-		const comments = req.comments.filter(
-			(comment) => comment.VideoId == video.id
-		);
+
+		// Получать через бд коммент и его юзера / {{where:, include:{}}}
+		const comments = req.comments;
+		//!!!
 		const allUsers = req.users.reduce((acc, user) => {
 			acc[user.id] = user.username;
 			return acc;

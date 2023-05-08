@@ -1,12 +1,13 @@
 <div class="form-container">
     <h3>Create Account</h3>
-    <form method="POST" action="/users/api/register" class="register-form">
+    <form class="register-form">
         <label>Username</label>
-        <input type="text" name="username" ><br>
+        <input type="text" name="username" class="username" ><br>
         <label>Email</label>
-        <input type="email" name="email" ><br>
+        <input type="email" name="email" class="email" ><br>
         <label>Password</label>
-        <input type="password" name="password" ><br>
+        <input type="password" name="password" class="password" ><br>
         <input type="submit" value="Submit" class="btn">
     </form>
 </div>
+<script src="/script/register.js"></script>

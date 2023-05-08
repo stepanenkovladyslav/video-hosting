@@ -20,9 +20,10 @@ class UserController {
 			password: hashPassword,
 		});
 		const token = generateJwt(user.id, user.email, user.username);
-		res.render("thank-you.hbs", {
-			styles: '<link href="/css/thank-you.css" rel="stylesheet"></link>',
-		});
+		// res.render("thank-you.hbs", {
+		// 	styles: '<link href="/css/thank-you.css" rel="stylesheet"></link>',
+		// });
+		return res.json(token);
 	}
 
 	static registerPage(req, res) {
