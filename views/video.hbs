@@ -13,7 +13,7 @@
         </form>
         {{#each comments}}
             <div class="comment">
-                <h4>{{this.User.username}}</h4>
+                <a href="/users/{{this.User.id}}"><h4>{{this.User.username}}</h4></a>
                 <p>{{this.text}}</p>
             </div>
         {{/each}}

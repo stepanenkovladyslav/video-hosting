@@ -56,9 +56,6 @@ class VideoController {
 	static async vidPage(req, res) {
 		const id = +req.params.id;
 		const video = await Video.findOne({ where: { id }, raw: true });
-
-		//!!! Получать через бд |
-		// const user = req.users.find((user) => user.id == video.UserId);
 		const user = await User.findOne({
 			where: { id: video.UserId },
 			raw: true,
@@ -69,7 +66,7 @@ class VideoController {
 			include: [
 				{
 					model: User,
-					attributes: ["username"],
+					attributes: ["username", "id"],
 				},
 			],
 		});

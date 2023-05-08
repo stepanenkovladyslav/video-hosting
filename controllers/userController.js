@@ -24,13 +24,17 @@ class UserController {
 	}
 
 	static registerPage(req, res) {
-		res.render("create-account.hbs", {
-			styles: '<link href="../css/createAcc.css" rel="stylesheet"></link>',
-		});
+		console.log(req.token);
+		if (req.token) {
+			res.json(req.token);
+		} else {
+			res.render("create-account.hbs", {
+				styles: '<link href="../css/createAcc.css" rel="stylesheet"></link>',
+			});
+		}
 	}
 	static async login(req, res) {
 		const { email, password } = req.body;
-		console.log(password);
 		const user = await User.findOne({ where: { email } });
 		if (user) {
 			const comparePassword = await bcrypt.compare(
@@ -39,9 +43,7 @@ class UserController {
 			);
 			if (comparePassword) {
 				const token = generateJwt(user.id, user.email);
-				res.render("thank-you.hbs", {
-					styles: '<link href="/css/thank-you.css" rel="stylesheet"></link>',
-				});
+				res.json(token);
 			} else {
 				res.status(404).json({ message: "Wrong password" });
 			}
