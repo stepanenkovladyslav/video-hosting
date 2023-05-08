@@ -6,7 +6,6 @@ const { Sequelize } = require("sequelize");
 const models = require("./model/models");
 const hbs = require("hbs");
 const expressHbs = require("express-handlebars");
-const getTokenMiddlware = require("./middlewares/getTokenMiddleware");
 
 const app = express();
 const PORT = process.env.PORT || 5000;

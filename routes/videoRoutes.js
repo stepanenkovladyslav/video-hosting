@@ -5,34 +5,11 @@ const path = require("path");
 const findUsersMiddleware = require("../middlewares/findUsersMiddleware");
 const { Video } = require("../model/models");
 const findCommentsMiddleware = require("../middlewares/findCommentsMiddleware");
-const multer = require("multer");
+const multerMiddleware = require("../middlewares/multerMiddleware");
 
 const videoRouter = new Router();
 
 const formParser = express.urlencoded({ extended: true });
-
-//Multer for uploads
-const storageConfig = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, "./videos");
-	},
-	filename: (req, file, cb) => {
-		cb(null, file.originalname);
-	},
-});
-
-const fileFilter = (req, file, cb) => {
-	if (file.mimetype === "video/mp4" || file.mimetype === "video/quicktime") {
-		cb(null, true);
-	} else {
-		cb(null, false);
-	}
-};
-const multerMiddleware = multer({
-	storage: storageConfig,
-	fileFilter: fileFilter,
-});
-//
 
 videoRouter.get("/", findUsersMiddleware, VideoController.getAll);
 

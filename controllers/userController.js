@@ -24,7 +24,6 @@ class UserController {
 	}
 
 	static registerPage(req, res) {
-		console.log(req.token);
 		if (req.token) {
 			res.json(req.token);
 		} else {
@@ -58,6 +57,7 @@ class UserController {
 			const verifier = jwt.verify(oldToken, process.env.SECRET_KEY);
 			const user = verifier;
 			const newToken = generateJwt(user.id, user.email);
+			global.token = newToken;
 			res.json(newToken);
 		} catch (e) {
 			res.json({ error: "Wrong token" });
