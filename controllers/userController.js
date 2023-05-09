@@ -44,10 +44,10 @@ class UserController {
 				const token = generateJwt(user.id, user.email);
 				res.json(token);
 			} else {
-				res.status(404).json({ message: "Wrong password" });
+				return res.status(404).json({ message: "Wrong password" });
 			}
 		} else {
-			res.status(404).json({ message: "Wrong email or password" });
+			return res.status(404).json({ message: "Wrong email or password" });
 		}
 	}
 

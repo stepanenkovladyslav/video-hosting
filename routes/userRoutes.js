@@ -3,8 +3,8 @@ const express = require("express");
 const User = require("../controllers/userController");
 const UserController = require("../controllers/userController");
 const findVideosMiddleware = require("../middlewares/findVideosMiddleware");
-const checkRegisterMiddleware = require("../middlewares/checkRegisterMiddelware");
-const checkLoginMiddleware = require("../middlewares/checkLoginMiddleware");
+const checkRegisterMiddleware = require("../middlewares/checkRegisterMiddelware.js");
+const checkLoginMiddleware = require("../middlewares/checkLoginMiddleware.js");
 
 const jsonParser = express.json();
 const userRouter = new Router();

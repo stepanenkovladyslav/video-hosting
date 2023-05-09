@@ -13,6 +13,14 @@ loginForm.addEventListener("submit", async (e) => {
 		},
 		body: JSON.stringify(data),
 	});
-	const token = await req.json();
-	localStorage.setItem("token", token);
+	if (!req.ok) {
+		const error = await req.json();
+		const errorMessage = document.createElement("p");
+		errorMessage.textContent = error.message;
+		errorMessage.className = "error-message";
+		loginForm.append(errorMessage);
+	} else {
+		const response = await req.json();
+		localStorage.setItem("token", response);
+	}
 });
