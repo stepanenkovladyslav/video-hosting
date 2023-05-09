@@ -28,3 +28,12 @@ h3 {
 input.btn {
     width: 3rem;
 }
+
+.error-message {
+    color: red;
+    margin-top: 1rem;
+}
+
+.ok-message {
+    margin-top: 1rem;
+}

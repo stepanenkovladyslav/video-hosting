@@ -6,21 +6,32 @@ loginForm.addEventListener("submit", async (e) => {
 		email: loginForm.email.value,
 		password: loginForm.password.value,
 	};
-	const req = await fetch("/users/api/login", {
+	const res = await fetch("/users/api/login", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data),
 	});
-	if (!req.ok) {
-		const error = await req.json();
-		const errorMessage = document.createElement("p");
-		errorMessage.textContent = error.message;
-		errorMessage.className = "error-message";
-		loginForm.append(errorMessage);
+	if (!res.ok) {
+		const error = await res.json();
+		console.log();
+		if (!document.querySelector(".error-message")) {
+			const errorMessage = document.createElement("p");
+			errorMessage.textContent = error.message;
+			errorMessage.className = "error-message";
+			loginForm.append(errorMessage);
+		}
 	} else {
-		const response = await req.json();
-		localStorage.setItem("token", response);
+		const token = await res.json();
+		localStorage.setItem("token", token);
+		if (document.querySelector(".error-message")) {
+			const error = document.querySelector(".error-message");
+			loginForm.removeChild(error);
+		}
+		const okMessage = document.createElement("p");
+		okMessage.className = "ok-message";
+		okMessage.textContent = "Successfully registered";
+		loginForm.append(okMessage);
 	}
 });

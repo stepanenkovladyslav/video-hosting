@@ -15,6 +15,22 @@ form.addEventListener("submit", async (e) => {
 		},
 		body: JSON.stringify(data),
 	});
-	const respData = await res.json();
-	localStorage.setItem("token", respData);
+	if (!res.ok) {
+		const error = await res.json();
+		const errorMessage = document.createElement("p");
+		errorMessage.className = "error-message";
+		errorMessage.textContent = error.message;
+		form.append(errorMessage);
+	} else {
+		const respData = await res.json();
+		localStorage.setItem("token", respData);
+		if (form.lastChild.textContent == "Bad Request") {
+			const error = document.querySelector(".error-message");
+			form.removeChild(error);
+		}
+		const okMessage = document.createElement("p");
+		okMessage.className = "ok-message";
+		okMessage.textContent = "Successfully registered";
+		form.append(okMessage);
+	}
 });
