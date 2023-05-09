@@ -1,7 +1,6 @@
 const checkRegisterMiddleware = (req, res, next) => {
 	const { username, email, password } = req.body;
 	if (!username || !email || !password) {
-		console.log("first");
 		return res.status(400).json({ message: "Bad Request" });
 	}
 	if (

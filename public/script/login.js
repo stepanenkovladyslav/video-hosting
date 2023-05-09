@@ -15,7 +15,6 @@ loginForm.addEventListener("submit", async (e) => {
 	});
 	if (!res.ok) {
 		const error = await res.json();
-		console.log();
 		if (!document.querySelector(".error-message")) {
 			const errorMessage = document.createElement("p");
 			errorMessage.textContent = error.message;

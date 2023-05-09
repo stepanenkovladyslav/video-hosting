@@ -17,14 +17,16 @@ form.addEventListener("submit", async (e) => {
 	});
 	if (!res.ok) {
 		const error = await res.json();
-		const errorMessage = document.createElement("p");
-		errorMessage.className = "error-message";
-		errorMessage.textContent = error.message;
-		form.append(errorMessage);
+		if (!document.querySelector(".error-message")) {
+			const errorMessage = document.createElement("p");
+			errorMessage.className = "error-message";
+			errorMessage.textContent = error.message;
+			form.append(errorMessage);
+		}
 	} else {
-		const respData = await res.json();
-		localStorage.setItem("token", respData);
-		if (form.lastChild.textContent == "Bad Request") {
+		const token = await res.json();
+		localStorage.setItem("token", token);
+		if (document.querySelector(".error-message")) {
 			const error = document.querySelector(".error-message");
 			form.removeChild(error);
 		}
