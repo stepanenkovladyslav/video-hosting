@@ -6,7 +6,6 @@ loginForm.addEventListener("submit", async (e) => {
 		email: loginForm.email.value,
 		password: loginForm.password.value,
 	};
-	console.log(JSON.stringify(data));
 	const req = await fetch("/users/api/login", {
 		method: "POST",
 		headers: {
