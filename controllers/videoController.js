@@ -98,16 +98,25 @@ class VideoController {
 	}
 
 	static async uploadVideo(req, res) {
-		const upload = req.file;
-		const name = req.body.name;
-		const video = await Video.create({
-			name: name,
-			fileName: upload.originalname,
-			UserId: 4,
-		});
-		res.render("thank-you.hbs", {
-			styles: '<link href="../css/thank-you.css" rel="stylesheet"></link>',
-		});
+		try {
+			const upload = req.file;
+			const name = req.body.name;
+			const video = await Video.create({
+				name: name,
+				fileName: upload.originalname,
+				UserId: 4,
+			});
+			res.render("thank-you.hbs", {
+				styles: '<link href="../css/thank-you.css" rel="stylesheet"></link>',
+			});
+		} catch (e) {
+			const error = { status: 400, message: "Wrong file type" };
+			res.status(400);
+			res.render("error.hbs", {
+				error: error,
+				styles: '<link href="../css/error.css" rel="stylesheet"></link>',
+			});
+		}
 	}
 }
 

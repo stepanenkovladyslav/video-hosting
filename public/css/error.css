@@ -1,0 +1,15 @@
+.plack {
+    width: 40%;
+    margin: 0 auto;
+    background-color: rgb(211, 207, 207);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+.link {
+    color: blue;
+    text-decoration: underline;
+}
