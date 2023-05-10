@@ -10,7 +10,7 @@ class Comments {
 			VideoId: videoId,
 		});
 		res.render("thank-you.hbs", {
-			styles: '<link href="../css/thank-you.css" rel="stylesheet"></link>',
+			styles: '<link href="/css/thank-you.css" rel="stylesheet"></link>',
 		});
 	}
 }
