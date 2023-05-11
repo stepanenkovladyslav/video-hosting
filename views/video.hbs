@@ -2,11 +2,11 @@
     <h3>{{video.name}}</h3>
     <a class="author" href="/">{{author.username}}</a>
     <video width="650" height="300" class="video" muted="muted" controls >
-        <source src="/api/video/{{video.id}}" type="video/mp4"/>
+        <source src="/api/video/{{video.id}}" class="video-source" type="video/mp4"/>
     </video>
     <section class="comment-section">
         <h3 class="comment-section-heading">Comments</h3>
-        <form class="add-comment auth-hide" method="post" action="/comments/api/create-comment">
+        <form class="add-comment auth-hide" >
             <h4>Add Comment</h4>
             <textarea type="text" class="comment-input" name="comment"></textarea>
             <button>Submit</button>
@@ -20,3 +20,4 @@
         {{/each}}
     </section>
 </div>
+<script src="/script/leaveComment.js"></script>
