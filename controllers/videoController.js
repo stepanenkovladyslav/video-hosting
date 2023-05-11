@@ -85,7 +85,7 @@ class VideoController {
 			res.render("video.hbs", {
 				video: video,
 				author: user,
-				comments: [{ text: "There are not comments", userName: "" }],
+				comments: [{ text: "There are no comments", userName: "" }],
 				styles: '<link href="../css/vidPage.css" rel="stylesheet"></link>',
 			});
 		}

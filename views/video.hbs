@@ -7,10 +7,11 @@
     <section class="comment-section">
         <h3 class="comment-section-heading">Comments</h3>
         <form class="add-comment auth-hide" method="post" action="/comments/api/create-comment">
-            <h4 >Add Comment</h4>
+            <h4>Add Comment</h4>
             <textarea type="text" class="comment-input" name="comment"></textarea>
             <button>Submit</button>
         </form>
+        <p class="add-comment not-auth">Please log in to leave comments</p>
         {{#each comments}}
             <div class="comment">
                 <a href="/users/{{this.User.id}}"><h4>{{this.User.username}}</h4></a>

@@ -31,3 +31,8 @@ a {
 .auth-show {
     display: block;
 }
+
+.not-auth {
+    text-align: center;
+    color: rgb(114, 31, 31);
+}
