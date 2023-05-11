@@ -22,3 +22,12 @@ a {
 .menu-item {
     cursor: pointer;
 }
+
+
+.auth-hide, form.auth-hide {
+    display: none;
+} 
+
+.auth-show {
+    display: block;
+}
