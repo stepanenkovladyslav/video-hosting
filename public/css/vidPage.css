@@ -57,3 +57,12 @@
 .comment>p {
     margin-top: 1rem;
 }
+
+.error-message {
+    color: red;
+    margin-top: 1rem;
+}
+
+.ok-message {
+    margin-top: 1rem;
+}
