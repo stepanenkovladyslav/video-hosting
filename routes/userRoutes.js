@@ -5,7 +5,6 @@ const UserController = require("../controllers/userController");
 const findVideosMiddleware = require("../middlewares/findVideosMiddleware");
 const checkRegisterMiddleware = require("../middlewares/checkRegisterMiddelware.js");
 const checkLoginMiddleware = require("../middlewares/checkLoginMiddleware.js");
-const checkTokenMiddleware = require("../middlewares/checkTokenMiddleware.js");
 
 const jsonParser = express.json();
 const userRouter = new Router();
@@ -19,7 +18,7 @@ userRouter.post(
 userRouter.get("/create-account", UserController.registerPage);
 userRouter.post("/api/login", checkLoginMiddleware, UserController.login);
 userRouter.get("/login", UserController.loginPage);
-userRouter.get("/api/auth", checkTokenMiddleware, UserController.updateToken);
+userRouter.get("/api/auth", UserController.updateToken);
 userRouter.get("/:id", findVideosMiddleware, UserController.userPage);
 
 module.exports = userRouter;

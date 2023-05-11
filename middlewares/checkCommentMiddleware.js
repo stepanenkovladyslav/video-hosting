@@ -1,12 +1,12 @@
+const ApiError = require("../error/ApiError");
 const checkCommentMiddleware = (req, res, next) => {
 	const { comment } = req.body;
-	console.log(comment);
 	if (!comment) {
-		return res.status(400).json({ message: "Empty comment" });
+		throw ApiError.badRequest("No comment sent");
 	}
 
 	if (typeof comment != "string") {
-		return res.status(400).json({ message: "Bad Request" });
+		throw ApiError.badRequest("Bad Request");
 	}
 	return next();
 };

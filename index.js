@@ -6,6 +6,7 @@ const { Sequelize } = require("sequelize");
 const models = require("./model/models");
 const hbs = require("hbs");
 const expressHbs = require("express-handlebars");
+const errorHandlingMiddleware = require("./middlewares/errorHandlingMiddleware");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ app.set("view engine", "hbs");
 
 app.use(express.static(__dirname + "/public"));
 app.use("/", router);
+app.use(errorHandlingMiddleware);
 
 const connect = async () => {
 	try {

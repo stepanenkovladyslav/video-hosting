@@ -30,7 +30,7 @@ loginForm.addEventListener("submit", async (e) => {
 		}
 		const okMessage = document.createElement("p");
 		okMessage.className = "ok-message";
-		okMessage.textContent = "Successfully registered";
+		okMessage.textContent = "Successfully logged in";
 		loginForm.append(okMessage);
 	}
 });
