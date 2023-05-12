@@ -6,6 +6,7 @@ const findUsersMiddleware = require("../middlewares/findUsersMiddleware");
 const { Video } = require("../model/models");
 const findCommentsMiddleware = require("../middlewares/findCommentsMiddleware");
 const multerMiddleware = require("../middlewares/multerMiddleware");
+const videoExistsMiddleware = require("../middlewares/videoExistsMiddleware");
 
 const videoRouter = new Router();
 
@@ -15,6 +16,7 @@ videoRouter.get("/", findUsersMiddleware, VideoController.getAll);
 
 videoRouter.get(
 	"/video/:id",
+	videoExistsMiddleware,
 	findUsersMiddleware,
 	findCommentsMiddleware,
 	VideoController.vidPage

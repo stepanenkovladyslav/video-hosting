@@ -4,6 +4,7 @@ const { log } = require("console");
 const path = require("path");
 const express = require("express");
 const { CLIENT_RENEG_WINDOW } = require("tls");
+const APIError = require("../error/ApiError");
 
 class VideoController {
 	static async getAll(req, res) {
@@ -55,7 +56,8 @@ class VideoController {
 
 	static async vidPage(req, res) {
 		const id = +req.params.id;
-		const video = await Video.findOne({ where: { id }, raw: true });
+		// const video = await Video.findOne({ where: { id }, raw: true });
+		const video = req.video;
 		const user = await User.findOne({
 			where: { id: video.UserId },
 			raw: true,
