@@ -13,24 +13,5 @@ loginForm.addEventListener("submit", async (e) => {
 		},
 		body: JSON.stringify(data),
 	});
-	if (!res.ok) {
-		const error = await res.json();
-		if (!document.querySelector(".error-message")) {
-			const errorMessage = document.createElement("p");
-			errorMessage.textContent = error.message;
-			errorMessage.className = "error-message";
-			loginForm.append(errorMessage);
-		}
-	} else {
-		const token = await res.json();
-		localStorage.setItem("token", token);
-		if (document.querySelector(".error-message")) {
-			const error = document.querySelector(".error-message");
-			loginForm.removeChild(error);
-		}
-		const okMessage = document.createElement("p");
-		okMessage.className = "ok-message";
-		okMessage.textContent = "Successfully logged in";
-		loginForm.append(okMessage);
-	}
+	responseHandling(res, loginForm);
 });

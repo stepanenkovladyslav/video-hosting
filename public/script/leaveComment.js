@@ -19,24 +19,7 @@ const submitComment = async (e) => {
 			videoId: videoId,
 		}),
 	});
-	if (!res.ok) {
-		const error = await res.json();
-		if (!document.querySelector(".error-message")) {
-			const errorMessage = document.createElement("p");
-			errorMessage.textContent = error.message;
-			errorMessage.className = "error-message";
-			commentForm.append(errorMessage);
-		}
-	} else {
-		if (document.querySelector(".error-message")) {
-			const error = document.querySelector(".error-message");
-			commentForm.removeChild(error);
-		}
-		const okMessage = document.createElement("p");
-		okMessage.className = "ok-message";
-		okMessage.textContent = "Successfully added comment";
-		commentForm.append(okMessage);
-	}
+	responseHandling(res, commentForm);
 };
 
 commentForm.addEventListener("submit", (e) => submitComment(e));
