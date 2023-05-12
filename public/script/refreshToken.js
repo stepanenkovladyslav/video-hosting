@@ -8,8 +8,14 @@ if (token) {
 				Authorization: `Bearer: ${token}`,
 			},
 		});
-		const newToken = await res.json();
-		localStorage.setItem("token", newToken);
+		if (!res.ok) {
+			const error = await res.json();
+			localStorage.removeItem("token");
+			console.log(error);
+		} else {
+			const newToken = await res.json();
+			localStorage.setItem("token", newToken);
+		}
 	};
 	refreshToken();
 }
