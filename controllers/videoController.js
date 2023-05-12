@@ -5,6 +5,7 @@ const path = require("path");
 const express = require("express");
 const { CLIENT_RENEG_WINDOW } = require("tls");
 const APIError = require("../error/ApiError");
+const jwt = require("jsonwebtoken");
 
 class VideoController {
 	static async getAll(req, res) {
@@ -56,7 +57,6 @@ class VideoController {
 
 	static async vidPage(req, res) {
 		const id = +req.params.id;
-		// const video = await Video.findOne({ where: { id }, raw: true });
 		const video = req.video;
 		const user = await User.findOne({
 			where: { id: video.UserId },
@@ -99,25 +99,27 @@ class VideoController {
 		});
 	}
 
-	static async uploadVideo(req, res) {
+	static async uploadVideo(req, res, next) {
+		console.log(req.file);
+		if (!req.file) {
+			next(APIError.badRequest("Wrong file fromat"));
+		}
+		const upload = req.file;
+		const token = req.headers.authorization.split(" ")[1];
+		const user = jwt.decode(token);
+		if (!user) {
+			next(APIError.unauthorized("Unauthorized"));
+		}
+		const videoName = req.body.name;
 		try {
-			const upload = req.file;
-			const name = req.body.name;
 			const video = await Video.create({
-				name: name,
+				name: videoName,
 				fileName: upload.originalname,
-				UserId: 4,
+				UserId: user.id,
 			});
-			res.render("thank-you.hbs", {
-				styles: '<link href="../css/thank-you.css" rel="stylesheet"></link>',
-			});
+			res.json({ message: "Success" });
 		} catch (e) {
-			const error = { status: 400, message: "Wrong file type" };
-			res.status(400);
-			res.render("error.hbs", {
-				error: error,
-				styles: '<link href="../css/error.css" rel="stylesheet"></link>',
-			});
+			next(e);
 		}
 	}
 }

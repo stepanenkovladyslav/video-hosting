@@ -2,7 +2,7 @@
     width: 40%;
     margin: 0 auto;
     border: 1px solid black;
-    height: 200px;
+    height: 230px;
 }
 
 .upload-heading {
@@ -34,4 +34,15 @@
 .btn {
     width: 20%;
     margin: 0 auto;
+}
+
+.error-message {
+    color: red;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.ok-message {
+    margin-top: 1rem;
+    text-align: center;
 }
