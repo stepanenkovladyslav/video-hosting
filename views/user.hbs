@@ -3,10 +3,10 @@
     <div class="video-grid">
         {{#each videos}}
         <div class="video-container">
-            <h3><a href="/video/{{this.id}}">{{this.name}}</a></h3>
             <video width="650" height="300" class="video" muted="muted" controls >
                 <source src="/api/video/{{this.id}}" type="video/mp4"/>
             </video>
+            <h3 class="channel"><a href="/video/{{this.id}}">{{this.name}}</a></h3>
         </div>
         {{/each}}
     </div>

@@ -13,9 +13,9 @@
     width: calc(25% - 2rem);
 }
 
-.user {
+.channel, .user {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .author>a {
@@ -25,5 +25,5 @@
 .video {
     margin-top: 1rem;
     max-width: 100%;
-    height: auto;
+    max-height: 250px;
 }

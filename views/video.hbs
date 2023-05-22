@@ -1,6 +1,6 @@
 <div class="video-container">
     <h3>{{video.name}}</h3>
-    <a class="author" href="/">{{author.username}}</a>
+    <a class="author" href="/users/{{author.id}}">{{author.username}}</a>
     <video width="650" height="300" class="video" muted="muted" controls >
         <source src="/api/video/{{video.id}}" class="video-source" type="video/mp4"/>
     </video>
