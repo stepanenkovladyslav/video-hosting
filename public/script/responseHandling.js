@@ -8,8 +8,10 @@ const responseHandling = async (res, form) => {
 			form.append(errorMessage);
 		}
 	} else {
-		const token = await res.json();
-		localStorage.setItem("token", token);
+		const response = await res.json();
+		if (typeof response == "string") {
+			localStorage.setItem("token", response);
+		}
 		if (document.querySelector(".error-message")) {
 			const error = document.querySelector(".error-message");
 			form.removeChild(error);
