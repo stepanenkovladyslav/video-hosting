@@ -1,6 +1,6 @@
-#Video Platform
+# Video Platform
 
-##Project Description
+## Project Description
 
 The project is built using Express + Handlebars + MySQL.
 
